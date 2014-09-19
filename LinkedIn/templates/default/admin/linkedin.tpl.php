@@ -24,15 +24,15 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="name">App ID</label>
+                <label class="control-label" for="name">App Key</label>
                 <div class="controls">
-                    <input type="text" id="name" placeholder="App ID" class="span4" name="appId" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['appId'])?>" >
+                    <input type="text" id="name" placeholder="App Key" class="span4" name="appId" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['appId'])?>" >
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="name">App secret</label>
+                <label class="control-label" for="name">Secret Key</label>
                 <div class="controls">
-                    <input type="text" id="name" placeholder="App secret" class="span4" name="secret" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['secret'])?>" >
+                    <input type="text" id="name" placeholder="Secret Key" class="span4" name="secret" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['secret'])?>" >
                 </div>
             </div>
             <div class="control-group">
