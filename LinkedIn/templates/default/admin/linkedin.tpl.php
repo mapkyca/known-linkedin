@@ -12,7 +12,7 @@
             <div class="control-group">
                 <div class="controls">
                     <p>
-                        To begin using LinkedIn, <a href="https://developers.linkedin.com/apps" target="_blank">create a new application in
+                        To begin using LinkedIn, <a href="https://www.linkedin.com/secure/developer" target="_blank">create a new application in
                             the LinkedIn apps portal</a>.</p>
                     <p>
                         Mark the integration method as <strong>Website with LinkedIn Login</strong>, and use <strong><?=\Idno\Core\site()->config()->url?></strong>
