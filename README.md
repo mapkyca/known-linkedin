@@ -10,6 +10,11 @@ Installation
 * Log into known and click on Administration.
 * Click "install" on the plugins page
 
+Known issues
+------------
+
+* LinkedIn has stupidly conservative rate limits on their API, so you may only be able to syndicate a handful of posts to LinkedIn within a 24 hour period. Choose wisely.
+
 Uses
 ----
 
