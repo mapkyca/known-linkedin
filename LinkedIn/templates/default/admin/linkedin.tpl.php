@@ -15,8 +15,7 @@
                         To begin using LinkedIn, <a href="https://www.linkedin.com/secure/developer" target="_blank">create a new application in
                             the LinkedIn apps portal</a>.</p>
                     <p>
-                        Mark the integration method as <strong>Website with LinkedIn Login</strong>, and use <strong><?=\Idno\Core\site()->config()->url?></strong>
-                        as the site URL.
+                        Add the following URL to the OAuth2 callback url box <strong><?=\Idno\Core\site()->config()->url?>linkedin/callback</strong>.
                     </p>
                     <p>
                         Once you've finished, fill in the details below:
