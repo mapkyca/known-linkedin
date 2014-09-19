@@ -55,16 +55,8 @@
 <body>'.htmlentities($message).'</body>
 </activity>
 '
-					    /*json_encode(
-					    [
-						'activity' => [
-						    'content_type' => 'linkedin-html',
-						    'body' => htmlentities($message)
-						]
-					    ]
-				    )*/ ,[
+					    ,[
 					"Content-Type: application/xml",
-					//"x-li-format" => "json"
 				    ]);
 				    
 				    if ($result['response'] == 201) {
