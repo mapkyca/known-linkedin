@@ -30,8 +30,14 @@
             }
 
             function registerEventHooks() {
+		
+		// Register syndication services
+		\Idno\Core\site()->syndication()->registerService('linkedin', function() {
+                    return $this->hasLinkedIn();
+                }, ['note','article','image']);
+		
                 // Push "notes" to LinkedIn
-               /* \Idno\Core\site()->addEventHook('post/note',function(\Idno\Core\Event $event) {
+                \Idno\Core\site()->addEventHook('post/note',function(\Idno\Core\Event $event) {
                     $object = $event->data()['object'];
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect()) {
@@ -39,18 +45,35 @@
                             $message = strip_tags($object->getDescription());
                             //$message .= "\n\n" . $object->getURL();
                             if (!empty($message) && substr($message,0,1) != '@') {
-                                $params = array(
-                                    'message' => $message
-                                );
-                                if (preg_match('/(?<!=)(?<!["\'])((ht|f)tps?:\/\/[^\s\r\n\t<>"\'\(\)]+)/i',$message,$matches)) {
-                                    $params['link'] = $matches[0];  // Set the first discovered link as the match
-                                }
+                                
                                 try {
-                                    $result = $linkedinAPI->api('/me/feed', 'POST', $params);
-                                    if (!empty($result['id'])) {
-										$object->setPosseLink('linkedin','https://linkedin.com/' . $result['id']);
-										$object->save();
-									}
+				    
+				    $result = \Idno\Core\Webservice::post('https://api.linkedin.com/v1/people/~/person-activities?oauth2_access_token='.\Idno\Core\site()->session()->currentUser()->linkedin['access_token'],
+					    '
+<activity locale="en_US">
+<content-type>linkedin-html</content-type>
+<body>'.htmlentities($message).'</body>
+</activity>
+'
+					    /*json_encode(
+					    [
+						'activity' => [
+						    'content_type' => 'linkedin-html',
+						    'body' => htmlentities($message)
+						]
+					    ]
+				    )*/ ,[
+					"Content-Type: application/xml",
+					//"x-li-format" => "json"
+				    ]);
+				    
+				    if ($result['response'] == 201) {
+					// Success
+					
+					$object->setPosseLink('linkedin','https://www.linkedin.com/nhome/?typeFilter=ALL#orderBy=Relevance&typeFilter=MYUPDATE'); // nasty, but linkedin doesn't seem to do permalinks.
+					$object->save();
+				    }
+				    
                                 } catch (\Exception $e) {
                                     \Idno\Core\site()->session()->addMessage('There was a problem posting to LinkedIn: ' . $e->getMessage());
                                 }
@@ -65,15 +88,34 @@
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect()) {
                             $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']);
-                            $result = $linkedinAPI->api('/me/feed', 'POST',
-                                array(
-                                    'link' => $object->getURL(),
-                                    'message' => $object->getTitle()
-                                ));
-                            if (!empty($result['id'])) {
-								$object->setPosseLink('linkedin','https://linkedin.com/' . $response['id']);
-								$object->save();
-							}
+                            
+			    $result = \Idno\Core\Webservice::post('https://api.linkedin.com/v1/people/~/shares?oauth2_access_token='.\Idno\Core\site()->session()->currentUser()->linkedin['access_token'],
+					    '
+<share>
+<content>
+<title>'.htmlentities(strip_tags($object->getTitle())).'</title>
+<submitted-url>'.htmlentities($object->getUrl()).'</submitted-url>
+</content>
+<visibility> 
+<code>anyone</code> 
+</visibility>
+</share>
+'				    ,[
+					"Content-Type: application/xml",
+				    ]);
+			
+			    
+			    if ($result['response'] == 201) {
+				// Success
+				$link = "";
+				if (preg_match('/<update-url>(.*?)<\/update-url>/', $page, $result['content'])) {
+				    $link = $matches[1];
+				}
+
+				$object->setPosseLink('linkedin',$link);
+				$object->save();
+			    }
+			    
                         }
                     }
                 });
@@ -85,32 +127,46 @@
                         foreach($attachments as $attachment) {
                             if ($this->hasLinkedIn()) {
                                 if ($linkedinAPI = $this->connect()) {
-                                    $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']);
-                                    $message = strip_tags($object->getDescription());
-									//$message .= "\n\n" . $object->getURL();
-                                    try {
-                                        $linkedinAPI->setFileUploadSupport(true);
-                                        $response = $linkedinAPI->api(
-                                            '/me/photos/',
-                                            'post',
-                                            array(
-                                                'message' => $message,
-                                                'url' => $attachment['url']
-                                            )
-                                        );
-                                        if (!empty($response['id'])) {
-                                        	$object->setPosseLink('linkedin','https://linkedin.com/' . $response['id']);
-                                        	$object->save();
-                                        }
-                                    }
-                                    catch (\LinkedInApiException $e) {
-                                        error_log('Could not post image to LinkedIn: ' . $e->getMessage());
-                                    }
-                                }
+				    $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']);
+
+				    
+				    $message = strip_tags($object->getDescription());
+				    $message .= "\n\nOriginal: " . $object->getURL();
+				    
+				    $result = \Idno\Core\Webservice::post('https://api.linkedin.com/v1/people/~/shares?oauth2_access_token='.\Idno\Core\site()->session()->currentUser()->linkedin['access_token'],
+						    '
+	<share>
+	<content>
+	<title>'.htmlentities(strip_tags($object->getTitle())).'</title>
+	<description>'.htmlentities($message).'</description>
+	<submitted-url>'.htmlentities($object->getUrl()).'</submitted-url>
+	<submitted-image-url>'.$attachment['url'].'</submitted-image-url>
+	</content>
+	<visibility> 
+	<code>anyone</code> 
+	</visibility>
+	</share>
+	'				    ,[
+						"Content-Type: application/xml",
+					    ]);
+
+
+				    if ($result['response'] == 201) {
+					// Success
+					$link = "";
+					if (preg_match('/<update-url>(.*?)<\/update-url>/', $page, $result['content'])) {
+					    $link = $matches[1];
+					}
+
+					$object->setPosseLink('linkedin',$link);
+					$object->save();
+				    }
+
+				}
                             }
                         }
                     }
-                }); */
+                }); 
             }
 
             /**
@@ -133,7 +189,7 @@
             }
 
             /**
-             * Can the current user use Twitter?
+             * Can the current user use Linkedin?
              * @return bool
              */
             function hasLinkedIn() {
