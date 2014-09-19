@@ -14,6 +14,7 @@ Known issues
 ------------
 
 * LinkedIn has stupidly conservative rate limits on their API, so you may only be able to syndicate a handful of posts to LinkedIn within a 24 hour period. Choose wisely.
+* LinkedIn's status update API doesn't (seem to) provide a permalink to the newly created update.
 
 Uses
 ----
