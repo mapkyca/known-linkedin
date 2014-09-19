@@ -18,11 +18,12 @@
                 if ($linkedin = \Idno\Core\site()->plugins()->get('LinkedIn')) {
                     if (!$linkedin->hasLinkedIn()) {
                         if ($linkedinAPI = $linkedin->connect()) {
-                            $login_url = $linkedinAPI->getLoginUrl(array(
-                                'scope' => 'publish_stream,offline_access,user_photos',
-                                'redirect_uri' => \Idno\Core\site()->config()->url . 'linkedin/callback',
-                                'cancel_url' => \Idno\Core\site()->config()->url . 'account/linkedin/',
-                            ));
+                            $login_url = $linkedinAPI->getAuthenticationUrl(
+				\IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
+				\IdnoPlugins\LinkedIn\Main::getRedirectUrl(),
+				['scope' => 'rw_nus', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()] 
+                            );
+			    
                         }
                     } else {
                         $login_url = '';
