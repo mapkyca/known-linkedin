@@ -65,6 +65,10 @@
 					$object->setPosseLink('linkedin','https://www.linkedin.com/nhome/?typeFilter=ALL#orderBy=Relevance&typeFilter=MYUPDATE'); // nasty, but linkedin doesn't seem to do permalinks.
 					$object->save();
 				    }
+				    else
+				    {
+					\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
+				    }
 				    
                                 } catch (\Exception $e) {
                                     \Idno\Core\site()->session()->addMessage('There was a problem posting to LinkedIn: ' . $e->getMessage());
@@ -106,6 +110,10 @@
 
 				$object->setPosseLink('linkedin',$link);
 				$object->save();
+			    }
+			    else
+			    {
+				\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 			    }
 			    
                         }
@@ -152,6 +160,10 @@
 
 					$object->setPosseLink('linkedin',$link);
 					$object->save();
+				    }
+				    else
+				    {
+					\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 				    }
 
 				}
