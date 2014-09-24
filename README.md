@@ -18,7 +18,7 @@ Known issues
 Uses
 ----
 
-* PHP-OAuth2 <https://github.com/adoy/PHP-OAuth2> by Pierrick Charron, so be sure to clone --recursive
+* PHP-OAuth2 <https://github.com/adoy/PHP-OAuth2> by Pierrick Charron, so be sure to ```clone --recursive```
 
 See
 ---
