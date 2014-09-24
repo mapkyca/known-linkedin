@@ -37,7 +37,7 @@
                 }, ['note','article','image']);
 		
                 // Push "notes" to LinkedIn
-                \Idno\Core\site()->addEventHook('post/note',function(\Idno\Core\Event $event) {
+                \Idno\Core\site()->addEventHook('post/note/linkedin',function(\Idno\Core\Event $event) {
                     $object = $event->data()['object'];
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect()) {
@@ -47,7 +47,7 @@
                             if (!empty($message) && substr($message,0,1) != '@') {
                                 
                                 try {
-				    				    
+				    
 				    $result = \Idno\Core\Webservice::post('https://api.linkedin.com/v1/people/~/shares?oauth2_access_token='.\Idno\Core\site()->session()->currentUser()->linkedin['access_token'],
 					    '
 <share>
@@ -85,7 +85,7 @@
                 });
 
                 // Push "articles" to LinkedIn
-                \Idno\Core\site()->addEventHook('post/article',function(\Idno\Core\Event $event) {
+                \Idno\Core\site()->addEventHook('post/article/linkedin',function(\Idno\Core\Event $event) {
                     $object = $event->data()['object'];
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect()) {
@@ -127,7 +127,7 @@
                 });
 
                 // Push "images" to LinkedIn
-                \Idno\Core\site()->addEventHook('post/image',function(\Idno\Core\Event $event) {
+                \Idno\Core\site()->addEventHook('post/image/linkedin',function(\Idno\Core\Event $event) {
                     $object = $event->data()['object'];
                     if ($attachments = $object->getAttachments()) {
                         foreach($attachments as $attachment) {
