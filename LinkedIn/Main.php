@@ -47,23 +47,29 @@
                             if (!empty($message) && substr($message,0,1) != '@') {
                                 
                                 try {
-				    
-				    $result = \Idno\Core\Webservice::post('https://api.linkedin.com/v1/people/~/person-activities?oauth2_access_token='.\Idno\Core\site()->session()->currentUser()->linkedin['access_token'],
+				    				    
+				    $result = \Idno\Core\Webservice::post('https://api.linkedin.com/v1/people/~/shares?oauth2_access_token='.\Idno\Core\site()->session()->currentUser()->linkedin['access_token'],
 					    '
-<activity locale="en_US">
-<content-type>linkedin-html</content-type>
-<body>'.htmlentities($message).'</body>
-</activity>
-'
-					    ,[
+<share>
+<comment>'.htmlentities($message).'</comment>
+<visibility> 
+<code>anyone</code> 
+</visibility>
+</share>
+'				    ,[
 					"Content-Type: application/xml",
 				    ]);
 				    
 				    if ($result['response'] == 201) {
 					// Success
-					
-					$object->setPosseLink('linkedin','https://www.linkedin.com/nhome/?typeFilter=ALL#orderBy=Relevance&typeFilter=MYUPDATE'); // nasty, but linkedin doesn't seem to do permalinks.
+					$link = "";
+					if (preg_match('/<update-url>(.*?)<\/update-url>/', $page, $result['content'])) {
+					    $link = $matches[1];
+					}
+
+					$object->setPosseLink('linkedin',$link);
 					$object->save();
+					
 				    }
 				    else
 				    {
