@@ -63,7 +63,7 @@
 				    if ($result['response'] == 201) {
 					// Success
 					$link = "";
-					if (preg_match('/<update-url>(.*?)<\/update-url>/', $page, $result['content'])) {
+					if (preg_match('/<update-url>(.*?)<\/update-url>/', $result['content'], $matches)) {
 					    $link = $matches[1];
 					}
 
@@ -110,7 +110,7 @@
 			    if ($result['response'] == 201) {
 				// Success
 				$link = "";
-				if (preg_match('/<update-url>(.*?)<\/update-url>/', $page, $result['content'])) {
+				if (preg_match('/<update-url>(.*?)<\/update-url>/', $result['content'], $matches)) {
 				    $link = $matches[1];
 				}
 
@@ -160,7 +160,7 @@
 				    if ($result['response'] == 201) {
 					// Success
 					$link = "";
-					if (preg_match('/<update-url>(.*?)<\/update-url>/', $page, $result['content'])) {
+					if (preg_match('/<update-url>(.*?)<\/update-url>/', $result['content'], $matches)) {
 					    $link = $matches[1];
 					}
 
