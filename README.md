@@ -6,7 +6,7 @@ This plugin provides LinkedIn syndication (POSSE) support for Known articles, st
 Installation
 ------------
 
-* Drop the Facebook folder into the IndoPlugins folder of your idno installation.
+* Drop the Linkedin folder into the IndoPlugins folder of your idno installation.
 * Log into known and click on Administration.
 * Click "install" on the plugins page
 
