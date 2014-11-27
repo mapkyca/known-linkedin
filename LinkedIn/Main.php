@@ -74,10 +74,12 @@
 				    else
 				    {
 					\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
+					
+					\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']}");
 				    }
 				    
                                 } catch (\Exception $e) {
-                                    \Idno\Core\site()->session()->addMessage('There was a problem posting to LinkedIn: ' . $e->getMessage());
+                                    \Idno\Core\site()->session()->addErrorMessage('There was a problem posting to LinkedIn: ' . $e->getMessage());
                                 }
                             }
                         }
@@ -119,6 +121,7 @@
 			    }
 			    else
 			    {
+				\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']}");
 				\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 			    }
 			    
@@ -169,6 +172,7 @@
 				    }
 				    else
 				    {
+					\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']}");
 					\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 				    }
 
