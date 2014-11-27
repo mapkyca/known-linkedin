@@ -73,9 +73,13 @@
 				    }
 				    else
 				    {
+					if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
+					    $message = $matches[1];
+					}
+					
 					\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 					
-					\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']}");
+					\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
 				    }
 				    
                                 } catch (\Exception $e) {
@@ -121,7 +125,10 @@
 			    }
 			    else
 			    {
-				\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']}");
+				if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
+				    $message = $matches[1];
+				}
+				\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
 				\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 			    }
 			    
@@ -172,7 +179,10 @@
 				    }
 				    else
 				    {
-					\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']}");
+					if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
+					    $message = $matches[1];
+					}
+					\Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
 					\Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 				    }
 
