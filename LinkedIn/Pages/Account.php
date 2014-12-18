@@ -19,25 +19,26 @@
                     if (!$linkedin->hasLinkedIn()) {
                         if ($linkedinAPI = $linkedin->connect()) {
                             $login_url = $linkedinAPI->getAuthenticationUrl(
-				\IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
-				\IdnoPlugins\LinkedIn\Main::getRedirectUrl(),
-				['scope' => 'rw_nus', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()] 
+                                \IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
+                                \IdnoPlugins\LinkedIn\Main::getRedirectUrl(),
+                                ['scope' => 'rw_nus', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()]
                             );
-			    
+
                         }
                     } else {
                         $login_url = '';
                     }
                 }
-                $t = \Idno\Core\site()->template();
+                $t    = \Idno\Core\site()->template();
                 $body = $t->__(['login_url' => $login_url])->draw('account/linkedin');
                 $t->__(['title' => 'LinkedIn', 'body' => $body])->drawPage();
             }
 
-            function postContent() {
+            function postContent()
+            {
                 $this->gatekeeper(); // Logged-in users only
                 if (($this->getInput('remove'))) {
-                    $user = \Idno\Core\site()->session()->currentUser();
+                    $user           = \Idno\Core\site()->session()->currentUser();
                     $user->linkedin = [];
                     $user->save();
                     \Idno\Core\site()->session()->addMessage('Your LinkedIn settings have been removed from your account.');
