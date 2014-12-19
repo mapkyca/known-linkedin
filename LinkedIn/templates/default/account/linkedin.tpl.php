@@ -10,7 +10,30 @@
     <div class="span10 offset1">
         <form action="/account/linkedin/" class="form-horizontal" method="post">
             <?php
-                if (empty(\Idno\Core\site()->session()->currentUser()->linkedin)) {
+                if (empty(\Idno\Core\site()->config()->linkedin['appId'])) {
+                    ?>
+                    <div class="control-group">
+                        <div class="controls">
+                            <p>
+                                This site has not been set up to connect to LinkedIn yet.
+                            </p>
+                            <?php
+
+                                if (\Idno\Core\site()->session()->isAdmin()) {
+
+                                ?>
+                                    <p>
+                                        To get started, <a href="<?=\Idno\Core\site()->config()->getDisplayURL()?>admin/linkedin/">click here</a>.
+                                    </p>
+                            <?php
+
+                                }
+
+                            ?>
+                        </div>
+                    </div>
+                    <?php
+                } else if (empty(\Idno\Core\site()->session()->currentUser()->linkedin)) {
             ?>
                     <div class="control-group">
                         <div class="controls">

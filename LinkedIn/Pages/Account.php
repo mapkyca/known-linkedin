@@ -15,6 +15,7 @@
             function getContent()
             {
                 $this->gatekeeper(); // Logged-in users only
+                $login_url = '';
                 if ($linkedin = \Idno\Core\site()->plugins()->get('LinkedIn')) {
                     if (!$linkedin->hasLinkedIn()) {
                         if ($linkedinAPI = $linkedin->connect()) {
@@ -25,8 +26,6 @@
                             );
 
                         }
-                    } else {
-                        $login_url = '';
                     }
                 }
                 $t    = \Idno\Core\site()->template();
