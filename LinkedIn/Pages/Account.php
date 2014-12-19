@@ -42,7 +42,7 @@
                     $user->save();
                     \Idno\Core\site()->session()->addMessage('Your LinkedIn settings have been removed from your account.');
                 }
-                $this->forward('/account/linkedin/');
+                $this->forward(\Idno\Core\site()->config()->getDisplayURL() . 'account/linkedin/');
             }
 
         }
