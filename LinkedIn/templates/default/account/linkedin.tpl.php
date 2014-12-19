@@ -8,9 +8,32 @@
 </div>
 <div class="row">
     <div class="span10 offset1">
-        <form action="/account/linkedin/" class="form-horizontal" method="post">
+        <form action="<?=\Idno\Core\site()->config()->getDisplayURL()?>account/linkedin/" class="form-horizontal" method="post">
             <?php
-                if (empty(\Idno\Core\site()->session()->currentUser()->linkedin)) {
+                if (empty(\Idno\Core\site()->config()->linkedin['appId'])) {
+                    ?>
+                    <div class="control-group">
+                        <div class="controls">
+                            <p>
+                                This site has not been set up to connect to LinkedIn yet.
+                            </p>
+                            <?php
+
+                                if (\Idno\Core\site()->session()->isAdmin()) {
+
+                                ?>
+                                    <p>
+                                        To get started, <a href="<?=\Idno\Core\site()->config()->getDisplayURL()?>admin/linkedin/">click here</a>.
+                                    </p>
+                            <?php
+
+                                }
+
+                            ?>
+                        </div>
+                    </div>
+                    <?php
+                } else if (empty(\Idno\Core\site()->session()->currentUser()->linkedin)) {
             ?>
                     <div class="control-group">
                         <div class="controls">
@@ -25,7 +48,7 @@
                     </div>
                 <?php
 
-                } else {
+                } else if (!\Idno\Core\site()->config()->multipleSyndicationAccounts()) {
 
                     ?>
                     <div class="control-group">
@@ -42,6 +65,40 @@
                     </div>
 
                 <?php
+
+                } else {
+
+?>
+                    <div class="control-group">
+                        <div class="controls">
+                            <p class="explanation">
+                                You have connected the following accounts to LinkedIn:
+                            </p>
+                            <?php
+
+                                if ($accounts = \Idno\Core\site()->syndication()->getServiceAccounts('linkedin')) {
+                                    foreach ($accounts as $account) {
+
+                                        ?>
+                                        <p>
+                                            <input type="hidden" name="remove" value="<?= $account['username'] ?>"/>
+                                            <button type="submit"
+                                                    class="btn btn-primary"><?= $account['name'] ?> (click to remove)</button>
+                                        </p>
+                                    <?php
+
+                                    }
+
+                                }
+
+                            ?>
+                            <p>
+                                <a href="<?= $vars['login_url'] ?>" class="">Click here
+                                    to connect another LinkedIn account</a>
+                            </p>
+                        </div>
+                    </div>
+<?php
 
                 }
             ?>
