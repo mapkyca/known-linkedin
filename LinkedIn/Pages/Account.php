@@ -17,7 +17,7 @@
                 $this->gatekeeper(); // Logged-in users only
                 $login_url = '';
                 if ($linkedin = \Idno\Core\site()->plugins()->get('LinkedIn')) {
-                    if (!$linkedin->hasLinkedIn()) {
+                    //if (!$linkedin->hasLinkedIn()) {
                         if ($linkedinAPI = $linkedin->connect()) {
                             $login_url = $linkedinAPI->getAuthenticationUrl(
                                 \IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
@@ -26,7 +26,7 @@
                             );
 
                         }
-                    }
+                    //}
                 }
                 $t    = \Idno\Core\site()->template();
                 $body = $t->__(['login_url' => $login_url])->draw('account/linkedin');
