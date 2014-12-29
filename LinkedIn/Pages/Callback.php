@@ -29,6 +29,21 @@
                             $id = $basic_profile['result']['id'];
                             $name = $basic_profile['result']['firstName'] . ' ' . $basic_profile['result']['lastName'];
                             $user->linkedin[$id] = ['access_token' => $response['result']['access_token'], 'name' => $name];
+
+                            // Get company pages
+                            if (\Idno\Core\site()->config()->multipleSyndicationAccounts()) {
+                                $admin_pages = $linkedinAPI->fetch('https://api.linkedin.com/v1/companies', array('oauth2_access_token' => $response['result']['access_token'], 'format' => 'json', 'is-company-admin' => 'true'));
+                                if (!empty($admin_pages['result'])) {
+                                    if (!empty($admin_pages['result']['values'])) {
+                                        foreach($admin_pages['result']['values'] as $company) {
+                                            $id = $company['id'];
+                                            $name = $company['name'];
+                                            $user->linkedin[$id] = ['access_token' => $response['result']['access_token'], 'name' => $name, 'company' => true];
+                                        }
+                                    }
+                                }
+                            }
+
                             $user->save();
                             \Idno\Core\site()->session()->addMessage('Your LinkedIn account was connected.');
 
