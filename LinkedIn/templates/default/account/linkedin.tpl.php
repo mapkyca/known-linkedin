@@ -25,7 +25,7 @@
 
                                 ?>
                                     <p>
-                                        To get started, <a href="<?=\Idno\Core\site()->config()->getDisplayURL()?>admin/linkedin/">click here</a>.
+                                        To get started, <a href="<?=\Idno\Core\site()->config()->getDisplayURL()?>admin/linkedin/">create a LinkedIn app</a>.
                                     </p>
                             <?php
 
@@ -70,14 +70,16 @@
                         <div class="controls-config">
 	                       <div class="row">
 						   		<div class="span6">
-                            <p>
-                                Your account is currently connected to LinkedIn. Public content that you post here
-                                will be shared with your LinkedIn account.
+							 <p>
+							 	Your account is currently connected to LinkedIn. Public updates, pictures, and posts that you publish here
+                                can be cross-posted to LinkedIn.
                             </p>
+                             <div class="social">
                             <p>
                                 <input type="hidden" name="remove" value="1" />
-                                <button type="submit" class="btn btn-large btn-primary">Click here to remove LinkedIn from your account.</button>
+                                <button type="submit" class="connect lkin connected">Disconnect LinkedIn</button>
                             </p>
+                             </div>
                         </div>
                     </div>
                         </div>
@@ -92,9 +94,11 @@
                         <div class="controls-config">
 	                        <div class="row">
 						   		<div class="span6">
-                            <p>
-                                You have connected the following accounts to LinkedIn:
+							  <p>
+							  	Your account is currently connected to LinkedIn. Public updates, pictures, and posts that you publish here
+                                can be cross-posted to LinkedIn.
                             </p>
+                            <div class="social">
                             <?php
 
                                 if ($accounts = \Idno\Core\site()->syndication()->getServiceAccounts('linkedin')) {
@@ -104,7 +108,7 @@
                                         <p>
                                             <input type="hidden" name="remove" value="<?= $account['username'] ?>"/>
                                             <button type="submit"
-                                                    class="btn btn-primary"><?= $account['name'] ?> (click to remove)</button>
+                                                    class="connect lkin connected"><?= $account['name'] ?> (Disconnect)</button>
                                         </p>
                                     <?php
 
@@ -113,14 +117,15 @@
                                 }
 
                             ?>
+                            </div>
                             <p>
-                                <a href="<?= $vars['login_url'] ?>" class="">Click here
-                                    to connect another LinkedIn account</a>
+                                <a href="<?= $vars['login_url'] ?>" class=""><icon class="icon-plus"></icon> Add another LinkedIn account</a>
                             </p>
+
                         </div>
                     </div>
-                        </div>
-                    </div>
+                    						   		</div>
+	                        </div>
 <?php
 
                 }
