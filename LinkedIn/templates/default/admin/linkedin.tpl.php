@@ -1,42 +1,57 @@
 <div class="row">
 
     <div class="span10 offset1">
-        <h1>LinkedIn</h1>
-        <?=$this->draw('admin/menu')?>
+	            <?=$this->draw('admin/menu')?>
+        <h1>LinkedIn configuration</h1>
     </div>
 
 </div>
+
 <div class="row">
     <div class="span10 offset1">
-        <form action="/admin/linkedin/" class="form-horizontal" method="post">
+        <form action="<?=\Idno\Core\site()->config()->getURL()?>admin/linkedin/" class="form-horizontal" method="post">
             <div class="control-group">
-                <div class="controls">
+                <div class="controls-config">
                     <p>
                         To begin using LinkedIn, <a href="https://www.linkedin.com/secure/developer" target="_blank">create a new application in
                             the LinkedIn apps portal</a>.</p>
+                            
                     <p>
-                        Add the following URL to the OAuth2 callback url box <strong><?=\Idno\Core\site()->config()->url?>linkedin/callback</strong>.
+                        Set the OAuth2 callback url to:<br />
+                        <input type="text" class="span5" value="<?=\Idno\Core\site()->config()->url?>linkedin/callback" />
                     </p>
-                    <p>
-                        Once you've finished, fill in the details below:
-                    </p>
+                    
                 </div>
             </div>
-            <div class="control-group">
+
+           <div class="control-group">
+	                                <p>
+                        Once you've finished, fill in the details below:
+                    </p>
                 <label class="control-label" for="name">API Key</label>
                 <div class="controls">
                     <input type="text" id="name" placeholder="API Key" class="span4" name="appId" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['appId'])?>" >
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="name">Secret Key</label>
+                 <label class="control-label" for="name">Secret Key</label>
                 <div class="controls">
                     <input type="text" id="name" placeholder="Secret Key" class="span4" name="secret" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['secret'])?>" >
                 </div>
+
             </div>
+            
+                      <div class="control-group">
+	          <p>
+                        After the LinkedIn application is configured, you must enable it under Plugins.
+                    </p>
+
+          </div>  
+
+
             <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                <div class="controls-save">
+                    <button type="submit" class="btn btn-primary">Save settings</button>
                 </div>
             </div>
             <?= \Idno\Core\site()->actions()->signForm('/admin/linkedin/')?>

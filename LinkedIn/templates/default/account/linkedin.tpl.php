@@ -1,8 +1,8 @@
 <div class="row">
 
     <div class="span10 offset1">
-        <h3>LinkedIn</h3>
         <?=$this->draw('account/menu')?>
+                <h1>LinkedIn</h1>
     </div>
 
 </div>
@@ -13,7 +13,9 @@
                 if (empty(\Idno\Core\site()->config()->linkedin['appId'])) {
                     ?>
                     <div class="control-group">
-                        <div class="controls">
+                        <div class="controls-config">
+	                       	<div class="row">
+						   		<div class="span6">
                             <p>
                                 This site has not been set up to connect to LinkedIn yet.
                             </p>
@@ -32,27 +34,42 @@
                             ?>
                         </div>
                     </div>
+                        </div>
+                    </div>
                     <?php
                 } else if (empty(\Idno\Core\site()->session()->currentUser()->linkedin)) {
             ?>
                     <div class="control-group">
-                        <div class="controls">
-                            <p>
-                                If you have a LinkedIn account, you may connect it here. Public content that you
-                                post to this site will be automatically cross-posted to your LinkedIn wall.
+                        <div class="controls-config">
+	                      	<div class="row">
+						   		<div class="span6">
+						<p>
+                                Easily share updates to LinkedIn.</p>  
+                                
+                                <p>
+                                With LinkedIn connected, you can cross-post updates, pictures, and posts that you publish publicly on your site.
                             </p>
+						   		</div>
+	                      	</div>
+                            
+                             <div class="social span4">
+                            
                             <p>
-                                <a href="<?=$vars['login_url']?>" class="btn btn-large btn-success">Click here to connect LinkedIn to your account</a>
+                                <a href="<?=$vars['login_url']?>" class="connect lkin">Connect LinkedIn</a>
                             </p>
+                             
                         </div>
-                    </div>
+                   </div>
+                 </div>
                 <?php
 
                 } else if (!\Idno\Core\site()->config()->multipleSyndicationAccounts()) {
 
                     ?>
                     <div class="control-group">
-                        <div class="controls">
+                        <div class="controls-config">
+	                       <div class="row">
+						   		<div class="span6">
                             <p>
                                 Your account is currently connected to LinkedIn. Public content that you post here
                                 will be shared with your LinkedIn account.
@@ -63,6 +80,8 @@
                             </p>
                         </div>
                     </div>
+                        </div>
+                    </div>
 
                 <?php
 
@@ -70,8 +89,10 @@
 
 ?>
                     <div class="control-group">
-                        <div class="controls">
-                            <p class="explanation">
+                        <div class="controls-config">
+	                        <div class="row">
+						   		<div class="span6">
+                            <p>
                                 You have connected the following accounts to LinkedIn:
                             </p>
                             <?php
@@ -96,6 +117,8 @@
                                 <a href="<?= $vars['login_url'] ?>" class="">Click here
                                     to connect another LinkedIn account</a>
                             </p>
+                        </div>
+                    </div>
                         </div>
                     </div>
 <?php
