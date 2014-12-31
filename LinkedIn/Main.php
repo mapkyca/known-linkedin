@@ -49,7 +49,7 @@
                 if ($this->hasLinkedIn()) {
                     if (is_array(\Idno\Core\site()->session()->currentUser()->linkedin) && !array_key_exists('access_token', \Idno\Core\site()->session()->currentUser()->linkedin)) {
                         foreach (\Idno\Core\site()->session()->currentUser()->linkedin as $id => $details) {
-                            \Idno\Core\site()->syndication()->registerServiceAccount('linkedin', $id, 'LI: ' . $details['name']);
+                            \Idno\Core\site()->syndication()->registerServiceAccount('linkedin', $id, $details['name']);
                         }
                     }
                 }
@@ -220,8 +220,6 @@
                         \Idno\Core\site()->config()->linkedin['appId'],
                         \Idno\Core\site()->config()->linkedin['secret']
                     );
-
-                    \Idno\Core\site()->session()->addMessage(var_export(\Idno\Core\site()->session()->currentUser()->linkedin,true));
 
                     if (empty($username)) {
                         if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin['access_token'])) {
