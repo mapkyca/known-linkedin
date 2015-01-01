@@ -23,9 +23,9 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="name">API Key</label>
+                <label class="control-label" for="name">App Key</label>
                 <div class="controls">
-                    <input type="text" id="name" placeholder="API Key" class="span4" name="appId" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['appId'])?>" >
+                    <input type="text" id="name" placeholder="App Key" class="span4" name="appId" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['appId'])?>" >
                 </div>
             </div>
             <div class="control-group">
