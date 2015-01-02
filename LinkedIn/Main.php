@@ -249,6 +249,9 @@
              */
             function hasLinkedIn()
             {
+                if (!(\Idno\Core\site()->session()->currentUser())) {
+                    return false;
+                }
                 if (\Idno\Core\site()->session()->currentUser()->linkedin) {
                     return true;
                 }
