@@ -60,7 +60,6 @@
                     $object    = $eventdata['object'];
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
-                            \Idno\Core\site()->session()->addMessage('token ' . self::$ACCESS_TOKEN);
                             $message = strip_tags($object->getDescription());
                             //$message .= "\n\n" . $object->getURL();
                             if (!empty($message) && substr($message, 0, 1) != '@') {

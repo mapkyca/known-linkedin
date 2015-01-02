@@ -22,7 +22,7 @@
                             $login_url = $linkedinAPI->getAuthenticationUrl(
                                 \IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
                                 \IdnoPlugins\LinkedIn\Main::getRedirectUrl(),
-                                ['scope' => 'rw_nus', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()]
+                                ['scope' => 'rw_nus,rw_company_admin,r_fullprofile,r_basicprofile', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()]
                             );
 
                         }
