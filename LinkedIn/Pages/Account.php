@@ -16,18 +16,17 @@
             {
                 $this->gatekeeper(); // Logged-in users only
                 if ($linkedin = \Idno\Core\site()->plugins()->get('LinkedIn')) {
-                    if (!$linkedin->hasLinkedIn()) {
+                    //if (!$linkedin->hasLinkedIn()) {
                         if ($linkedinAPI = $linkedin->connect()) {
                             $login_url = $linkedinAPI->getAuthenticationUrl(
-				\IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
-				\IdnoPlugins\LinkedIn\Main::getRedirectUrl(),
-				['scope' => 'rw_nus', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()] 
+                                \IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
+                                \IdnoPlugins\LinkedIn\Main::getRedirectUrl(),
+                                ['scope' => 'rw_nus,rw_company_admin,r_fullprofile,r_basicprofile', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()]
                             );
 			    
                         }
-                    } else {
-                        $login_url = '';
-                    }
+
+                    //}
                 }
                 $t = \Idno\Core\site()->template();
                 $body = $t->__(['login_url' => $login_url])->draw('account/linkedin');
