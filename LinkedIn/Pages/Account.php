@@ -35,9 +35,13 @@
 
             function postContent() {
                 $this->gatekeeper(); // Logged-in users only
-                if (($this->getInput('remove'))) {
-                    $user = \Idno\Core\site()->session()->currentUser();
-                    $user->linkedin = [];
+                if (($account = $this->getInput('remove'))) {
+                    $user           = \Idno\Core\site()->session()->currentUser();
+                    if (array_key_exists($account, $user->linkedin)) {
+                        unset($user->linkedin[$account]);
+                    } else {
+                        $user->linkedin = [];
+                    }
                     $user->save();
                     \Idno\Core\site()->session()->addMessage('Your LinkedIn settings have been removed from your account.');
                 }
