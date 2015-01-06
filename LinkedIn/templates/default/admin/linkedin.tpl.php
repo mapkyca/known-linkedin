@@ -30,20 +30,20 @@
                     </p>
                 <label class="control-label" for="name">API Key</label>
                 <div class="controls">
-                    <input type="text" id="name" placeholder="App Key" class="span4" name="appId" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['appId'])?>" >
+                    <input type="text" id="name" placeholder="API Key" class="span6" name="appId" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['appId'])?>" >
                 </div>
             </div>
             <div class="control-group">
                  <label class="control-label" for="name">Secret Key</label>
                 <div class="controls">
-                    <input type="text" id="name" placeholder="Secret Key" class="span4" name="secret" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['secret'])?>" >
+                    <input type="text" id="name" placeholder="Secret Key" class="span6" name="secret" value="<?=htmlspecialchars(\Idno\Core\site()->config()->linkedin['secret'])?>" >
                 </div>
 
             </div>
             
                       <div class="control-group">
 	          <p>
-                        After the LinkedIn application is configured, you must enable it under Plugins.
+                        After the LinkedIn application is configured, you must connect under account Settings.
                     </p>
 
           </div>  
