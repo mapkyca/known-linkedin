@@ -31,6 +31,8 @@
                 \Idno\Core\site()->addPageHandler('admin/linkedin', '\IdnoPlugins\LinkedIn\Pages\Admin');
                 // Register settings page
                 \Idno\Core\site()->addPageHandler('account/linkedin', '\IdnoPlugins\LinkedIn\Pages\Account');
+                // Deauth
+                \Idno\Core\site()->addPageHandler('linkedin/deauth', '\IdnoPlugins\LinkedIn\Pages\Deauth');
 
                 /** Template extensions */
                 // Add menu items to account & administration screens
