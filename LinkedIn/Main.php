@@ -62,6 +62,11 @@
                     $object    = $eventdata['object'];
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
+                            if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                            } else {
+                                $name = 'LinkedIn';
+                            }
                             $message = strip_tags($object->getDescription());
                             //$message .= "\n\n" . $object->getURL();
                             if (!empty($message) && substr($message, 0, 1) != '@') {
@@ -87,7 +92,7 @@
                                             $link = $matches[1];
                                         }
 
-                                        $object->setPosseLink('linkedin', $link);
+                                        $object->setPosseLink('linkedin', $link, $name);
                                         $object->save();
 
                                     } else {
@@ -115,6 +120,12 @@
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
 
+                            if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                            } else {
+                                $name = 'LinkedIn';
+                            }
+
                             $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . self::$ACCESS_TOKEN,
                                 '
 <share>
@@ -138,7 +149,7 @@
                                     $link = $matches[1];
                                 }
 
-                                $object->setPosseLink('linkedin', $link);
+                                $object->setPosseLink('linkedin', $link, $name);
                                 $object->save();
                             } else {
                                 if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
@@ -160,6 +171,12 @@
                         foreach ($attachments as $attachment) {
                             if ($this->hasLinkedIn()) {
                                 if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
+
+                                    if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                        $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                                    } else {
+                                        $name = 'LinkedIn';
+                                    }
 
                                     $message = strip_tags($object->getDescription());
                                     $message .= "\n\nOriginal: " . $object->getURL();
@@ -189,7 +206,7 @@
                                             $link = $matches[1];
                                         }
 
-                                        $object->setPosseLink('linkedin', $link);
+                                        $object->setPosseLink('linkedin', $link, $name);
                                         $object->save();
                                     } else {
                                         if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
