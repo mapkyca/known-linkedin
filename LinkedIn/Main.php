@@ -49,9 +49,13 @@
                 }, ['note', 'article', 'image']);
 
                 if ($this->hasLinkedIn()) {
-                    if (is_array(\Idno\Core\site()->session()->currentUser()->linkedin) && !array_key_exists('access_token', \Idno\Core\site()->session()->currentUser()->linkedin)) {
+                    if (is_array(\Idno\Core\site()->session()->currentUser()->linkedin)) {
                         foreach (\Idno\Core\site()->session()->currentUser()->linkedin as $id => $details) {
-                            \Idno\Core\site()->syndication()->registerServiceAccount('linkedin', $id, $details['name']);
+                            if ($id != 'access_token') {
+                                \Idno\Core\site()->syndication()->registerServiceAccount('linkedin', $id, $details['name']);
+                            } else {
+                                \Idno\Core\site()->syndication()->registerServiceAccount('linkedin', $id, 'LinkedIn');
+                            }
                         }
                     }
                 }
@@ -240,7 +244,7 @@
                     );
 
                     if (empty($username)) {
-                        if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin['access_token'])) {
+                        if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']) && ($username == 'LinkedIn' || empty($username))) {
                             $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']);
                             self::$ACCESS_TOKEN = \Idno\Core\site()->session()->currentUser()->linkedin['access_token'];
                         }
