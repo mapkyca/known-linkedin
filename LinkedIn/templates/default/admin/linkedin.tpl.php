@@ -43,7 +43,7 @@
             
                       <div class="control-group">
 	          <p>
-                        After the LinkedIn application is configured, you must connect under account Settings.
+                        After the LinkedIn application is configured, <a href="<?=\Idno\Core\site()->config()->getDisplayURL()?>account/linkedin">click here to authenticate with LinkedIn</a>.
                     </p>
 
           </div>  

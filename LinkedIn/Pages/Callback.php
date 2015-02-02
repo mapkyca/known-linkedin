@@ -50,7 +50,12 @@
 			}
                     }
                 }
-                $this->forward('/account/linkedin/');
+		
+                if (!empty($_SESSION['onboarding_passthrough'])) {
+                    unset($_SESSION['onboarding_passthrough']);
+                    $this->forward(\Idno\Core\site()->config()->getDisplayURL() . 'begin/connect-forwarder');
+                }
+                $this->forward(\Idno\Core\site()->config()->getDisplayURL() . 'account/linkedin');
             }
 
         }
