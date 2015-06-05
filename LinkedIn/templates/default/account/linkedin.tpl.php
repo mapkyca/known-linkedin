@@ -1,20 +1,20 @@
 <div class="row">
 
-    <div class="span10 offset1">
+    <div class="col-md-10 col-md-offset-1">
         <?= $this->draw('account/menu') ?>
         <h1>LinkedIn</h1>
     </div>
 
 </div>
 <div class="row">
-    <div class="span10 offset1">
+    <div class="col-md-10 col-md-offset-1">
         <?php
             if (empty(\Idno\Core\site()->config()->linkedin['appId'])) {
                 ?>
                 <div class="control-group">
                     <div class="controls-config">
                         <div class="row">
-                            <div class="span6">
+                            <div class="col-md-7">
                                 <p>
                                     This site has not been set up to connect to LinkedIn yet.
                                 </p>
@@ -43,7 +43,7 @@
                 <div class="control-group">
                     <div class="controls-config">
                         <div class="row">
-                            <div class="span6">
+                            <div class="col-md-7">
                                 <p>
                                     Easily share updates to LinkedIn.</p>
 
@@ -51,14 +51,16 @@
                                     With LinkedIn connected, you can cross-post updates, pictures, and posts that you
                                     publish publicly on your site.
                                 </p>
+
+
+								<div class="social">
+
+								<p>
+                               	 <a href="<?= $vars['login_url'] ?>" class="connect lkin"><i class="fa fa-linkedin"></i>
+ Connect LinkedIn</a>
+                            	</p>
+								</div>
                             </div>
-                        </div>
-
-                        <div class="social span4">
-
-                            <p>
-                                <a href="<?= $vars['login_url'] ?>" class="connect lkin">Connect LinkedIn</a>
-                            </p>
 
                         </div>
                     </div>
@@ -71,7 +73,7 @@
                 <div class="control-group">
                     <div class="controls-config">
                         <div class="row">
-                            <div class="span6">
+                            <div class="col-md-7">
                                 <p>
                                     Your account is currently connected to LinkedIn. Public updates, pictures, and posts
                                     that you publish here
@@ -83,7 +85,8 @@
                                           class="form-horizontal" method="post">
                                         <p>
                                             <input type="hidden" name="remove" value="1"/>
-                                            <button type="submit" class="connect lkin connected">Disconnect LinkedIn
+                                            <button type="submit" class="connect lkin connected"><i class="fa fa-linkedin"></i>
+ Disconnect LinkedIn
                                             </button>
                                             <?= \Idno\Core\site()->actions()->signForm('/account/linkedin/') ?>
                                         </p>
@@ -102,7 +105,7 @@
                 <div class="control-group">
                     <div class="controls-config">
                         <div class="row">
-                            <div class="span6">
+                            <div class="col-md-7">
                                 <p>
                                     Your account is currently connected to LinkedIn. Public updates, pictures, and posts
                                     that you publish here
@@ -123,7 +126,8 @@
                                                         <input type="hidden" name="remove"
                                                                value="<?= $account['username'] ?>"/>
                                                         <button type="submit"
-                                                                class="connect lkin connected"><?= $account['name'] ?>
+                                                                class="connect lkin connected"><i class="fa fa-linkedin"></i>
+ <?= $account['name'] ?>
                                                             (Disconnect)
                                                         </button>
                                                         <?= \Idno\Core\site()->actions()->signForm('/account/linkedin/') ?>
@@ -139,7 +143,7 @@
                                 </div>
                                 <p>
                                     <a href="<?= $vars['login_url'] ?>" class="">
-                                        <icon class="icon-plus"></icon>
+                                        <i class="fa fa-plus"></i>
                                         Add another LinkedIn account</a>
                                 </p>
 
