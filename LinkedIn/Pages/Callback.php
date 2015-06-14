@@ -23,9 +23,22 @@
                             ['code' => $this->getInput('code'), 'redirect_uri' => \IdnoPlugins\LinkedIn\Main::getRedirectUrl(), 'state' => \IdnoPlugins\LinkedIn\Main::getState()])
                         ) {
 
+			    // Catch some errors
+			    if (($this->getInput('error')) && ($error = $this->getInput('error_description')))
+				    throw new \Exception($error);
+			    
                             $user           = \Idno\Core\site()->session()->currentUser();
 
                             $basic_profile = $linkedinAPI->fetch('https://api.linkedin.com/v1/people/~:(id,first-name,last-name,site-standard-profile-request)', array('oauth2_access_token' => $response['result']['access_token'], 'format' => 'json'));
+			    
+			    if (!$basic_profile['result']['id'])
+			    {
+				if ($basic_profile['result']['message'])
+				    throw new \Exception($basic_profile['result']['message']);
+				else 
+				    throw new \Exception("Sorry, there was a problem getting your profile. Does your app have appropriate permissions?");
+			    }
+			    
                             $id = $basic_profile['result']['id'];
                             $name = $basic_profile['result']['firstName'] . ' ' . $basic_profile['result']['lastName'];
                             $user->linkedin[$id] = ['access_token' => $response['result']['access_token'], 'name' => $name];
