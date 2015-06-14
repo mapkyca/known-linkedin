@@ -1,3 +1,0 @@
-[submodule "LinkedIn/vendor/PHP-OAuth2"]
-	path = LinkedIn/vendor/PHP-OAuth2
-	url = git@github.com:adoy/PHP-OAuth2.git
