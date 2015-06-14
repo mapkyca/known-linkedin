@@ -235,11 +235,8 @@
             function connect($username = false)
             {
                 if (!empty(\Idno\Core\site()->config()->linkedin)) {
-                    require_once(dirname(__FILE__) . '/vendor/PHP-OAuth2/src/OAuth2/Client.php');
-                    require_once(dirname(__FILE__) . '/vendor/PHP-OAuth2/src/OAuth2/GrantType/IGrantType.php');
-                    require_once(dirname(__FILE__) . '/vendor/PHP-OAuth2/src/OAuth2/GrantType/AuthorizationCode.php');
-
-                    $linkedinAPI = new \OAuth2\Client(
+                  
+                    $linkedinAPI = new Client(
                         \Idno\Core\site()->config()->linkedin['appId'],
                         \Idno\Core\site()->config()->linkedin['secret']
                     );
