@@ -25,9 +25,9 @@
 
 			    // Catch some errors
 			    if (($this->getInput('error')) && ($error = $this->getInput('error_description')))
-				    throw new \Exception($error);
-			    
-                            $user           = \Idno\Core\site()->session()->currentUser();
+				    throw new \Exception($error);	
+		    
+                            $user  = \Idno\Core\site()->session()->currentUser();
 
                             $basic_profile = $linkedinAPI->fetch('https://api.linkedin.com/v1/people/~:(id,first-name,last-name,site-standard-profile-request)', array('oauth2_access_token' => $response['result']['access_token'], 'format' => 'json'));
 			    
