@@ -9,8 +9,6 @@
             public static $TOKEN_ENDPOINT = 'https://www.linkedin.com/uas/oauth2/accessToken';
             public static $SHARE_URL = 'https://api.linkedin.com/v1/people/~/shares';
 
-            protected static $ACCESS_TOKEN = '';
-
             public static $company = false;
 
             public static function getRedirectUrl()
@@ -77,7 +75,7 @@
 
                                 try {
 
-                                    $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . self::$ACCESS_TOKEN,
+                                    $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . $linkedinAPI->access_token,
                                         '
 <share>
 <comment>' . htmlentities($message) . '</comment>
@@ -130,7 +128,7 @@
                                 $name = 'LinkedIn';
                             }
 
-                            $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . self::$ACCESS_TOKEN,
+                            $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . $linkedinAPI->access_token,
                                 '
 <share>
 <content>
@@ -186,7 +184,7 @@
                                     $message = strip_tags($object->getDescription());
                                     $message .= "\n\nOriginal: " . $object->getURL();
 
-                                    $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . self::$ACCESS_TOKEN,
+                                    $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . $linkedinAPI->access_token,
                                         '
 	<share>
 	<content>
@@ -244,13 +242,11 @@
                     if (empty($username)) {
                         if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']) && ($username == 'LinkedIn' || empty($username))) {
                             $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']);
-                            self::$ACCESS_TOKEN = \Idno\Core\site()->session()->currentUser()->linkedin['access_token'];
                         }
                     } else {
 
                         if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$username]['access_token'])) {
                             $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin[$username]['access_token']);
-                            self::$ACCESS_TOKEN = \Idno\Core\site()->session()->currentUser()->linkedin[$username]['access_token'];
                             if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$username]['company'])) {
                                 self::$company = true;
                                 self::$SHARE_URL = 'https://api.linkedin.com/v1/companies/'.$username.'/shares';
