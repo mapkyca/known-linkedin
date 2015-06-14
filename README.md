@@ -10,15 +10,12 @@ Installation
 * Log into Known and navigate to Site configuration > Plugins.
 * Enable the LinkedIn plugin on the Plugins page.
 
+This plugin no longer requires a third party OAuth2 library, instead it makes use of Known's internal webservices API.
+
 Known issues
 ------------
 
 * LinkedIn has stupidly conservative rate limits on their API, so you may only be able to syndicate a handful of posts to LinkedIn within a 24 hour period. Choose wisely.
-
-Uses
-----
-
-* PHP-OAuth2 <https://github.com/adoy/PHP-OAuth2> by Pierrick Charron, so be sure to ```clone --recursive```
 
 See
 ---
