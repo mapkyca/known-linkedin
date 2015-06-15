@@ -37,6 +37,16 @@ namespace IdnoPlugins\LinkedIn {
 	    $parameters['client_secret'] = $this->secret;
 	    $parameters['grant_type'] = $grant_type;
 	    
+	    
+	    /**
+	     * Note from the original OAuth 2 library:
+	     * 
+	     * Passing an array to CURLOPT_POSTFIELDS will encode the data as multipart/form-data,
+	     * while passing a URL-encoded string will encode the data as application/x-www-form-urlencoded.
+	     * http://php.net/manual/en/function.curl-setopt.php
+	     * 
+	     * ... Linked in API will only accept the latter at this stage.
+	    */
 	    $result = \Idno\Core\Webservice::post(\IdnoPlugins\LinkedIn\Main::$TOKEN_ENDPOINT, http_build_query($parameters, null, '&'));
 	    
 	    return json_decode($result['content']);
