@@ -44,7 +44,7 @@
                 // Register syndication services
                 \Idno\Core\site()->syndication()->registerService('linkedin', function () {
                     return $this->hasLinkedIn();
-                }, ['note','article','image']);
+                }, ['note','article','image', 'bookmark']);
 
                 if ($this->hasLinkedIn()) {
                     if (is_array(\Idno\Core\site()->session()->currentUser()->linkedin)) {
@@ -134,6 +134,57 @@
 <content>
 <title>' . htmlentities(strip_tags($object->getTitle()), ENT_XML1, 'UTF-8') . '</title>
 <submitted-url>' . htmlentities($object->getUrl(), ENT_XML1, 'UTF-8') . '</submitted-url>
+</content>
+<visibility> 
+<code>anyone</code> 
+</visibility>
+</share>
+', [
+                                    "Content-Type: application/xml",
+                                ]);
+
+
+                            if ($result['response'] == 201) {
+                                // Success
+                                $link = "";
+                                if (preg_match('/<update-url>(.*?)<\/update-url>/', $result['content'], $matches)) {
+                                    $link = $matches[1];
+                                }
+
+                                $object->setPosseLink('linkedin', $link, $name);
+                                $object->save();
+                            } else {
+                                if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
+                                    $message = $matches[1];
+                                }
+                                \Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
+                                \Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
+                            }
+
+                        }
+                    }
+                });
+		
+		// Push "bookmark" to LinkedIn
+                \Idno\Core\site()->addEventHook('post/bookmark/linkedin', function (\Idno\Core\Event $event) {
+                    $eventdata = $event->data();
+                    $object    = $eventdata['object'];
+                    if ($this->hasLinkedIn()) {
+                        if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
+
+                            if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                            } else {
+                                $name = 'LinkedIn';
+                            }
+
+                            $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . $linkedinAPI->access_token,
+                                '
+<share>
+<content>
+<title>' . htmlentities($object->pageTitle ? $object->pageTitle : $object->body) . '</title>
+<description>' . htmlentities($object->description) . '</description>
+<submitted-url>' . htmlentities($object->body) . '</submitted-url>
 </content>
 <visibility> 
 <code>anyone</code> 
