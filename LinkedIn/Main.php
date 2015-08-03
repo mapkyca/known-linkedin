@@ -78,7 +78,7 @@
                                     $result = \Idno\Core\Webservice::post(self::$SHARE_URL . '?oauth2_access_token=' . $linkedinAPI->access_token,
                                         '
 <share>
-<comment>' . htmlentities($message) . '</comment>
+<comment>' . htmlentities($message, ENT_XML1, 'UTF-8') . '</comment>
 <visibility> 
 <code>anyone</code> 
 </visibility>
@@ -132,8 +132,8 @@
                                 '
 <share>
 <content>
-<title>' . htmlentities(strip_tags($object->getTitle())) . '</title>
-<submitted-url>' . htmlentities($object->getUrl()) . '</submitted-url>
+<title>' . htmlentities(strip_tags($object->getTitle()), ENT_XML1, 'UTF-8') . '</title>
+<submitted-url>' . htmlentities($object->getUrl(), ENT_XML1, 'UTF-8') . '</submitted-url>
 </content>
 <visibility> 
 <code>anyone</code> 
@@ -188,9 +188,9 @@
                                         '
 	<share>
 	<content>
-	<title>' . htmlentities(strip_tags($object->getTitle())) . '</title>
-	<description>' . htmlentities($message) . '</description>
-	<submitted-url>' . htmlentities($object->getUrl()) . '</submitted-url>
+	<title>' . htmlentities(strip_tags($object->getTitle()), ENT_XML1, 'UTF-8') . '</title>
+	<description>' . htmlentities($message, ENT_XML1, 'UTF-8') . '</description>
+	<submitted-url>' . htmlentities($object->getUrl(), ENT_XML1, 'UTF-8') . '</submitted-url>
 	<submitted-image-url>' . $attachment['url'] . '</submitted-image-url>
 	</content>
 	<visibility> 
