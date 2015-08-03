@@ -182,9 +182,9 @@
                                 '
 <share>
 <content>
-<title>' . htmlentities($object->pageTitle ? $object->pageTitle : $object->body) . '</title>
-<description>' . htmlentities($object->description) . '</description>
-<submitted-url>' . htmlentities($object->body) . '</submitted-url>
+<title>' . htmlentities($object->pageTitle ? $object->pageTitle : $object->body, ENT_XML1, 'UTF-8') . '</title>
+<description>' . htmlentities($object->description, ENT_XML1, 'UTF-8') . '</description>
+<submitted-url>' . htmlentities($object->body, ENT_XML1, 'UTF-8') . '</submitted-url>
 </content>
 <visibility> 
 <code>anyone</code> 
