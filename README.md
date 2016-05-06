@@ -6,7 +6,7 @@ This plugin provides LinkedIn syndication (POSSE) support for Known articles, st
 Installation
 ------------
 
-* Drop the Linkedin folder into the IdnoPlugins folder of your Known installation.
+* Drop the LinkedIn folder into the IdnoPlugins folder of your Known installation.
 * Log into Known and navigate to Site configuration > Plugins.
 * Enable the LinkedIn plugin on the Plugins page.
 
