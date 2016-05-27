@@ -1,1 +1,1 @@
-<li <?php if ($_SERVER['REQUEST_URI'] == '/admin/linkedin/') echo 'class="active"'; ?>><a href="/admin/linkedin/">LinkedIn</a></li>
+<li <?php if (strpos($_SERVER['REQUEST_URI'], '/admin/linkedin/') !== false) echo 'class="active"'; ?>><a href="<?=\Idno\Core\site()->config()->getDisplayURL(); ?>admin/linkedin/">LinkedIn</a></li>
