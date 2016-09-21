@@ -3,6 +3,8 @@ Linkedin Support for Known
 
 This plugin provides LinkedIn syndication (POSSE) support for Known articles, status updates and images.
 
+Released under GPLv2, see [LICENCE.txt]
+
 Installation
 ------------
 
