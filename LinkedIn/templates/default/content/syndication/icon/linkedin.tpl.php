@@ -1,2 +1,2 @@
-<i class="fa fa-linkedin"></i>
+<i class="fab fa-linkedin"></i>
 
