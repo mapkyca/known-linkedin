@@ -56,7 +56,7 @@
 								<div class="social">
 
 								<p>
-                               	 <a href="<?= $vars['login_url'] ?>" class="connect lkin"><i class="fa fa-linkedin"></i>
+                               	 <a href="<?= $vars['login_url'] ?>" class="connect lkin"><i class="fab fa-linkedin"></i>
  Connect LinkedIn</a>
                             	</p>
 								</div>
@@ -85,7 +85,7 @@
                                           class="form-horizontal" method="post">
                                         <p>
                                             <input type="hidden" name="remove" value="1"/>
-                                            <button type="submit" class="connect lkin connected"><i class="fa fa-linkedin"></i>
+                                            <button type="submit" class="connect lkin connected"><i class="fab fa-linkedin"></i>
  Disconnect LinkedIn
                                             </button>
                                             <?= \Idno\Core\site()->actions()->signForm('/account/linkedin/') ?>
@@ -126,7 +126,7 @@
                                                         <input type="hidden" name="remove"
                                                                value="<?= $account['username'] ?>"/>
                                                         <button type="submit"
-                                                                class="connect lkin connected"><i class="fa fa-linkedin"></i>
+                                                                class="connect lkin connected"><i class="fab fa-linkedin"></i>
  <?= $account['name'] ?>
                                                             (Disconnect)
                                                         </button>
