@@ -24,13 +24,13 @@
             function registerPages()
             {
                 // Register the callback URL
-                \Idno\Core\site()->addPageHandler('linkedin/callback', '\IdnoPlugins\LinkedIn\Pages\Callback');
+                \Idno\Core\Idno::site()->routes()->addRoute('linkedin/callback', '\IdnoPlugins\LinkedIn\Pages\Callback');
                 // Register admin settings
-                \Idno\Core\site()->addPageHandler('admin/linkedin', '\IdnoPlugins\LinkedIn\Pages\Admin');
+                \Idno\Core\Idno::site()->routes()->addRoute('admin/linkedin', '\IdnoPlugins\LinkedIn\Pages\Admin');
                 // Register settings page
-                \Idno\Core\site()->addPageHandler('account/linkedin', '\IdnoPlugins\LinkedIn\Pages\Account');
+                \Idno\Core\Idno::site()->routes()->addRoute('account/linkedin', '\IdnoPlugins\LinkedIn\Pages\Account');
                 // Deauth
-                \Idno\Core\site()->addPageHandler('linkedin/deauth', '\IdnoPlugins\LinkedIn\Pages\Deauth');
+                \Idno\Core\Idno::site()->routes()->addRoute('linkedin/deauth', '\IdnoPlugins\LinkedIn\Pages\Deauth');
 
                 /** Template extensions */
                 // Add menu items to account & administration screens
@@ -46,7 +46,7 @@
                     return $this->hasLinkedIn();
                 }, ['note','article','image', 'bookmark']);
 		
-		\Idno\Core\site()->addEventHook('user/auth/success', function (\Idno\Core\Event $event) {
+		\Idno\Core\Idno::site()->events()->addListener('user/auth/success', function (\Idno\Core\Event $event) {
 		    if ($this->hasLinkedIn()) {
 			if (is_array(\Idno\Core\site()->session()->currentUser()->linkedin)) { 
 			    foreach (\Idno\Core\site()->session()->currentUser()->linkedin as $id => $details) {
@@ -61,7 +61,7 @@
 		});
 
                 // Push "notes" to LinkedIn
-                \Idno\Core\site()->addEventHook('post/note/linkedin', function (\Idno\Core\Event $event) {
+                \Idno\Core\Idno::site()->events()->addListener('post/note/linkedin', function (\Idno\Core\Event $event) {
                     $eventdata = $event->data();
                     $object    = $eventdata['object'];
                     if ($this->hasLinkedIn()) {
@@ -118,7 +118,7 @@
                 });
 
                 // Push "articles" to LinkedIn
-                \Idno\Core\site()->addEventHook('post/article/linkedin', function (\Idno\Core\Event $event) {
+                \Idno\Core\Idno::site()->events()->addListener('post/article/linkedin', function (\Idno\Core\Event $event) {
                     $eventdata = $event->data();
                     $object    = $eventdata['object'];
                     if ($this->hasLinkedIn()) {
@@ -168,7 +168,7 @@
                 });
 		
 		// Push "bookmark" to LinkedIn
-                \Idno\Core\site()->addEventHook('post/bookmark/linkedin', function (\Idno\Core\Event $event) {
+                \Idno\Core\Idno::site()->events()->addListener('post/bookmark/linkedin', function (\Idno\Core\Event $event) {
                     $eventdata = $event->data();
                     $object    = $eventdata['object'];
                     if ($this->hasLinkedIn()) {
@@ -219,7 +219,7 @@
                 });
 
                 // Push "images" to LinkedIn
-                \Idno\Core\site()->addEventHook('post/image/linkedin', function (\Idno\Core\Event $event) {
+                \Idno\Core\Idno::site()->events()->addListener('post/image/linkedin', function (\Idno\Core\Event $event) {
                     $eventdata = $event->data();
                     $object    = $eventdata['object'];
                     if ($attachments = $object->getAttachments()) {
