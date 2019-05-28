@@ -13,12 +13,12 @@
 
             public static function getRedirectUrl()
             {
-                return \Idno\Core\site()->config()->url . 'linkedin/callback';
+                return \Idno\Core\Idno::site()->config()->url . 'linkedin/callback';
             }
 
             public static function getState()
             {
-                return md5(\Idno\Core\site()->config()->url . dirname(__FILE__));
+                return md5(\Idno\Core\Idno::site()->config()->url . dirname(__FILE__));
             }
 
             function registerPages()
@@ -34,26 +34,26 @@
 
                 /** Template extensions */
                 // Add menu items to account & administration screens
-                \Idno\Core\site()->template()->extendTemplate('admin/menu/items', 'admin/linkedin/menu');
-                \Idno\Core\site()->template()->extendTemplate('account/menu/items', 'account/linkedin/menu');
+                \Idno\Core\Idno::site()->template()->extendTemplate('admin/menu/items', 'admin/linkedin/menu');
+                \Idno\Core\Idno::site()->template()->extendTemplate('account/menu/items', 'account/linkedin/menu');
             }
 
             function registerEventHooks()
             {
 
                 // Register syndication services
-                \Idno\Core\site()->syndication()->registerService('linkedin', function () {
+                \Idno\Core\Idno::site()->syndication()->registerService('linkedin', function () {
                     return $this->hasLinkedIn();
                 }, ['note','article','image', 'bookmark']);
 		
 		\Idno\Core\Idno::site()->events()->addListener('user/auth/success', function (\Idno\Core\Event $event) {
 		    if ($this->hasLinkedIn()) {
-			if (is_array(\Idno\Core\site()->session()->currentUser()->linkedin)) { 
-			    foreach (\Idno\Core\site()->session()->currentUser()->linkedin as $id => $details) {
+			if (is_array(\Idno\Core\Idno::site()->session()->currentUser()->linkedin)) { 
+			    foreach (\Idno\Core\Idno::site()->session()->currentUser()->linkedin as $id => $details) {
 				if ($id != 'access_token') {
-				    \Idno\Core\site()->syndication()->registerServiceAccount('linkedin', $id, $details['name']);
+				    \Idno\Core\Idno::site()->syndication()->registerServiceAccount('linkedin', $id, $details['name']);
 				} else {
-				    \Idno\Core\site()->syndication()->registerServiceAccount('linkedin', $id, 'LinkedIn');
+				    \Idno\Core\Idno::site()->syndication()->registerServiceAccount('linkedin', $id, 'LinkedIn');
 				}
 			    }
 			}
@@ -66,8 +66,8 @@
                     $object    = $eventdata['object'];
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
-                            if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
-                                $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                            if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                $name = \Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
                             } else {
                                 $name = 'LinkedIn';
                             }
@@ -104,13 +104,13 @@
                                             $message = $matches[1];
                                         }
 
-                                        \Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
+                                        \Idno\Core\Idno::site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
 
-                                        \Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
+                                        \Idno\Core\Idno::site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
                                     }
 
                                 } catch (\Exception $e) {
-                                    \Idno\Core\site()->session()->addErrorMessage('There was a problem posting to LinkedIn: ' . $e->getMessage());
+                                    \Idno\Core\Idno::site()->session()->addErrorMessage('There was a problem posting to LinkedIn: ' . $e->getMessage());
                                 }
                             }
                         }
@@ -124,8 +124,8 @@
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
 
-                            if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
-                                $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                            if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                $name = \Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
                             } else {
                                 $name = 'LinkedIn';
                             }
@@ -159,8 +159,8 @@
                                 if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
                                     $message = $matches[1];
                                 }
-                                \Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
-                                \Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
+                                \Idno\Core\Idno::site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
+                                \Idno\Core\Idno::site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
                             }
 
                         }
@@ -174,8 +174,8 @@
                     if ($this->hasLinkedIn()) {
                         if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
 
-                            if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
-                                $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                            if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                $name = \Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
                             } else {
                                 $name = 'LinkedIn';
                             }
@@ -210,8 +210,8 @@
                                 if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
                                     $message = $matches[1];
                                 }
-                                \Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
-                                \Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
+                                \Idno\Core\Idno::site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
+                                \Idno\Core\Idno::site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
                             }
 
                         }
@@ -228,8 +228,8 @@
 
                                 if ($linkedinAPI = $this->connect($eventdata['syndication_account'])) {
 
-                                    if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
-                                        $name = \Idno\Core\site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
+                                    if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'])) {
+                                        $name = \Idno\Core\Idno::site()->session()->currentUser()->linkedin[$eventdata['syndication_account']]['name'];
                                     } else {
                                         $name = 'LinkedIn';
                                     }
@@ -268,8 +268,8 @@
                                         if (preg_match('/<message>(.*?)<\/message>/', $result['content'], $matches)) {
                                             $message = $matches[1];
                                         }
-                                        \Idno\Core\site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
-                                        \Idno\Core\site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
+                                        \Idno\Core\Idno::site()->session()->addErrorMessage("Linkedin returned error code: {$result['response']} - $message");
+                                        \Idno\Core\Idno::site()->logging->log("LinkedIn Syndication: " . print_r($result, true), LOGLEVEL_ERROR);
                                     }
 
                                 }
@@ -285,22 +285,22 @@
              */
             function connect($username = false)
             {
-                if (!empty(\Idno\Core\site()->config()->linkedin)) {
+                if (!empty(\Idno\Core\Idno::site()->config()->linkedin)) {
                   
                     $linkedinAPI = new Client(
-                        \Idno\Core\site()->config()->linkedin['appId'],
-                        \Idno\Core\site()->config()->linkedin['secret']
+                        \Idno\Core\Idno::site()->config()->linkedin['appId'],
+                        \Idno\Core\Idno::site()->config()->linkedin['secret']
                     );
 
                     if (empty($username)) {
-                        if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']) && ($username == 'LinkedIn' || empty($username))) {
-                            $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin['access_token']);
+                        if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin['access_token']) && ($username == 'LinkedIn' || empty($username))) {
+                            $linkedinAPI->setAccessToken(\Idno\Core\Idno::site()->session()->currentUser()->linkedin['access_token']);
                         }
                     } else {
 
-                        if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$username]['access_token'])) {
-                            $linkedinAPI->setAccessToken(\Idno\Core\site()->session()->currentUser()->linkedin[$username]['access_token']);
-                            if (!empty(\Idno\Core\site()->session()->currentUser()->linkedin[$username]['company'])) {
+                        if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$username]['access_token'])) {
+                            $linkedinAPI->setAccessToken(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$username]['access_token']);
+                            if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$username]['company'])) {
                                 self::$company = true;
                                 self::$SHARE_URL = 'https://api.linkedin.com/v1/companies/'.$username.'/shares';
                             }
@@ -319,10 +319,10 @@
              */
             function hasLinkedIn()
             {
-                if (!(\Idno\Core\site()->session()->currentUser())) {
+                if (!(\Idno\Core\Idno::site()->session()->currentUser())) {
                     return false;
                 }
-                if (\Idno\Core\site()->session()->currentUser()->linkedin) {
+                if (\Idno\Core\Idno::site()->session()->currentUser()->linkedin) {
                     return true;
                 }
 
