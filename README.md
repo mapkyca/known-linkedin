@@ -8,7 +8,7 @@ Released under GPLv2, see [LICENCE.txt](LICENCE.txt)
 Installation
 ------------
 
-* Drop the LinkedIn folder into the IdnoPlugins folder of your Known installation.
+* Drop the repo folder into the IdnoPlugins folder of your Known installation as Linkedin.
 * Log into Known and navigate to Site configuration > Plugins.
 * Enable the LinkedIn plugin on the Plugins page.
 
