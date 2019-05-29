@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c52ea02d977f85923992169149b7ac8d",
+    "packages": [],
+    "packages-dev": [
+        {
+            "name": "mapkyca/known-language-tools",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mapkyca/known-language-tools.git",
+                "reference": "257f2d423a8906c27045e1a32ab2a2e1c22a2fb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mapkyca/known-language-tools/zipball/257f2d423a8906c27045e1a32ab2a2e1c22a2fb7",
+                "reference": "257f2d423a8906c27045e1a32ab2a2e1c22a2fb7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Marcus Povey",
+                    "email": "marcus@marcus-povey.co.uk",
+                    "homepage": "https://www.marcus-povey.co.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "I18N dev tools for Known",
+            "homepage": "https://github.com/mapkyca/known-language-tools/",
+            "keywords": [
+                "i18n",
+                "indieweb",
+                "internationalisation",
+                "known"
+            ],
+            "time": "2019-03-15T22:44:01+00:00"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

@@ -5,5 +5,8 @@
     "version": "1.1.0",
     "extra": {
         "installer-name": "Linkedin"
+    },
+    "require-dev": {
+        "mapkyca/known-language-tools": "^1.0"
     }
 }

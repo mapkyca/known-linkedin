@@ -38,6 +38,16 @@
                 \Idno\Core\Idno::site()->template()->extendTemplate('admin/menu/items', 'admin/linkedin/menu');
                 \Idno\Core\Idno::site()->template()->extendTemplate('account/menu/items', 'account/linkedin/menu');
             }
+            
+            function registerTranslations()
+            {
+
+                \Idno\Core\Idno::site()->language()->register(
+                    new \Idno\Core\GetTextTranslation(
+                        'linkedin', dirname(__FILE__) . '/languages/'
+                    )
+                );
+            }
 
             function registerEventHooks()
             {

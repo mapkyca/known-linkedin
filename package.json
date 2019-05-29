@@ -1,0 +1,8 @@
+{
+  "name": "LinkedIn",
+  "version": "1.1.0",
+  "description": "Cross-post content to LinkedIn",
+  "devDependencies": {
+    "grunt": "^1.0.3"
+  }
+}
