@@ -41,7 +41,7 @@
 				$user  = \Idno\Core\site()->session()->currentUser();
 
 				$result = \Idno\Core\Webservice::get(
-				    'https://api.linkedin.com/v1/people/~:(id,first-name,last-name,site-standard-profile-request)', 
+                                \IdnoPlugins\LinkedIn\Main::$PEOPLE_URL, 
 				    [
 					'oauth2_access_token' => $response->access_token, 
 					'format' => 'json'
