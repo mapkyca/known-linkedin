@@ -5,11 +5,11 @@
         class Main extends \Idno\Common\Plugin
         {
 
-            public static $AUTHORIZATION_ENDPOINT = 'https://www.linkedin.com/uas/oauth2/authorization';
-            public static $TOKEN_ENDPOINT = 'https://www.linkedin.com/uas/oauth2/accessToken';
-            public static $SHARE_URL = 'https://api.linkedin.com/v1/people/~/shares';
-            public static $PEOPLE_URL = 'https://api.linkedin.com/v1/people/~:(id,first-name,last-name,site-standard-profile-request)';
-            public static $COMPANIES_URL = 'https://api.linkedin.com/v1/companies';
+            public static $AUTHORIZATION_ENDPOINT = 'https://www.linkedin.com/oauth/v2/authorization';
+            public static $TOKEN_ENDPOINT = 'https://www.linkedin.com/oauth/v2/accessToken';
+            public static $SHARE_URL = 'https://api.linkedin.com/v2/shares';
+            public static $PEOPLE_URL = 'https://api.linkedin.com/v2/me/~:(id,first-name,last-name,site-standard-profile-request)';
+            public static $COMPANIES_URL = 'https://api.linkedin.com/v2/organizations/';
 
             public static $company = false;
 
