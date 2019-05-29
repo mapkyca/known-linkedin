@@ -1,0 +1,76 @@
+#: ./templates/default/admin/linkedin.tpl.php:5
+msgid "LinkedIn configuration"
+msgstr ""
+
+#: ./templates/default/admin/linkedin.tpl.php:16
+msgid "To begin using LinkedIn, <a href=\"https://www.linkedin.com/secure/developer\" target=\"_blank\">create a new application in the LinkedIn apps portal</a>."
+msgstr ""
+
+#: ./templates/default/admin/linkedin.tpl.php:19
+msgid "Set the OAuth2 callback url to"
+msgstr ""
+
+#: ./templates/default/admin/linkedin.tpl.php:28
+msgid "Once you\'ve finished, fill in the details below:"
+msgstr ""
+
+#: ./templates/default/admin/linkedin.tpl.php:44
+msgid "After the LinkedIn application is configured, <a href=\"%saccount/linkedin\">click here to authenticate with LinkedIn"
+msgstr ""
+
+#: ./templates/default/admin/linkedin.tpl.php:52
+msgid "Save settings"
+msgstr ""
+
+#: ./templates/default/account/linkedin.tpl.php:20
+msgid "This site has not been set up to connect to LinkedIn yet."
+msgstr ""
+
+#: ./templates/default/account/linkedin.tpl.php:28
+msgid "To get started, <a href=\"%sadmin/linkedin\">create a LinkedIn app</a>."
+msgstr ""
+
+#: ./templates/default/account/linkedin.tpl.php:48
+msgid "Easily share updates to LinkedIn."
+msgstr ""
+
+#: ./templates/default/account/linkedin.tpl.php:51
+msgid "With LinkedIn connected, you can cross-post updates, pictures, and posts that you publish publicly on your site."
+msgstr ""
+
+#: ./templates/default/account/linkedin.tpl.php:59
+msgid "Connect LinkedIn"
+msgstr ""
+
+#: ./templates/default/account/linkedin.tpl.php:77
+msgid "Your account is currently connected to LinkedIn. Public updates, pictures, and posts that you publish here can be cross-posted to LinkedIn."
+msgstr ""
+
+#: ./templates/default/account/linkedin.tpl.php:86
+msgid "Disconnect LinkedIn"
+msgstr ""
+
+#: ./Pages/Account.php:48
+msgid "Your LinkedIn settings have been removed from your account."
+msgstr ""
+
+#: ./Pages/Admin.php:33
+msgid "Your LinkedIn application details were saved."
+msgstr ""
+
+#: ./Pages/Callback.php:34
+msgid "Sorry, access token is unavailable."
+msgstr ""
+
+#: ./Pages/Callback.php:58
+msgid "Sorry, there was a problem getting your profile. Does your app have appropriate permissions?"
+msgstr ""
+
+#: ./Pages/Callback.php:83
+msgid "Your LinkedIn account was connected."
+msgstr ""
+
+#: ./Client.php:34
+msgid "State value not correct, possible CSRF attempt."
+msgstr ""
+

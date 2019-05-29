@@ -2,7 +2,7 @@
 
     <div class="col-md-10 col-md-offset-1">
 	            <?=$this->draw('admin/menu')?>
-        <h1>LinkedIn configuration</h1>
+        <h1><?= Idno\Core\Idno::site()->language()->_('LinkedIn configuration'); ?></h1>
     </div>
 
 </div>
@@ -13,11 +13,10 @@
             <div class="controls-group">
                 <div class="controls-config">
                     <p>
-                        To begin using LinkedIn, <a href="https://www.linkedin.com/secure/developer" target="_blank">create a new application in
-                            the LinkedIn apps portal</a>.</p>
+                        <?= Idno\Core\Idno::site()->language()->_('To begin using LinkedIn, <a href="https://www.linkedin.com/secure/developer" target="_blank">create a new application in the LinkedIn apps portal</a>.') ?></p>
                             
                     <p>
-                        Set the OAuth2 callback url to:<br />
+                        <?= Idno\Core\Idno::site()->language()->_('Set the OAuth2 callback url to'); ?>:<br />
                         <input type="text" class="form-control" value="<?=\Idno\Core\site()->config()->url?>linkedin/callback" />
                     </p>
                     
@@ -26,7 +25,7 @@
 
            <div class="controls-group">
 	                                <p>
-                        Once you've finished, fill in the details below:
+                        <?= Idno\Core\Idno::site()->language()->_('Once you\'ve finished, fill in the details below:'); ?>
                     </p>
                 <label class="control-label" for="name">API Key</label>
 
@@ -42,7 +41,7 @@
             
                       <div class="controls-group">
 	          <p>
-                        After the LinkedIn application is configured, <a href="<?=\Idno\Core\site()->config()->getDisplayURL()?>account/linkedin">click here to authenticate with LinkedIn</a>.
+                        <?= Idno\Core\Idno::site()->language()->_('After the LinkedIn application is configured, <a href="%saccount/linkedin">click here to authenticate with LinkedIn', [ \Idno\Core\site()->config()->getDisplayURL() ]); ?></a>.
                     </p>
 
           </div>  
@@ -50,7 +49,7 @@
 
             <div class="controls-group">
                 <div class="controls-save">
-                    <button type="submit" class="btn btn-primary">Save settings</button>
+                    <button type="submit" class="btn btn-primary"><?= Idno\Core\Idno::site()->language()->_('Save settings'); ?></button>
                 </div>
             </div>
             <?= \Idno\Core\site()->actions()->signForm('/admin/linkedin/')?>

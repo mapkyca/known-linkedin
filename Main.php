@@ -9,6 +9,7 @@
             public static $TOKEN_ENDPOINT = 'https://www.linkedin.com/uas/oauth2/accessToken';
             public static $SHARE_URL = 'https://api.linkedin.com/v1/people/~/shares';
             public static $PEOPLE_URL = 'https://api.linkedin.com/v1/people/~:(id,first-name,last-name,site-standard-profile-request)';
+            public static $COMPANIES_URL = 'https://api.linkedin.com/v1/companies';
 
             public static $company = false;
 
@@ -313,7 +314,7 @@
                             $linkedinAPI->setAccessToken(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$username]['access_token']);
                             if (!empty(\Idno\Core\Idno::site()->session()->currentUser()->linkedin[$username]['company'])) {
                                 self::$company = true;
-                                self::$SHARE_URL = 'https://api.linkedin.com/v1/companies/'.$username.'/shares';
+                                self::$SHARE_URL = self::$COMPANIES_URL. '/'.$username.'/shares';
                             }
                         }
                     }

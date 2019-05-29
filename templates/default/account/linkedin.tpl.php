@@ -1,3 +1,4 @@
+
 <div class="row">
 
     <div class="col-md-10 col-md-offset-1">
@@ -16,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <p>
-                                    This site has not been set up to connect to LinkedIn yet.
+                                    <?= Idno\Core\Idno::site()->language()->_('This site has not been set up to connect to LinkedIn yet.'); ?>
                                 </p>
                                 <?php
 
@@ -24,9 +25,8 @@
 
                                         ?>
                                         <p>
-                                            To get started, <a
-                                                href="<?= \Idno\Core\site()->config()->getDisplayURL() ?>admin/linkedin/">create
-                                                a LinkedIn app</a>.
+                                            <?= Idno\Core\Idno::site()->language()->_('To get started, <a href="%sadmin/linkedin">create a LinkedIn app</a>.', [\Idno\Core\Idno::site()->config()->getDisplayURL()]); ?>
+                                           
                                         </p>
                                     <?php
 
@@ -45,11 +45,10 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <p>
-                                    Easily share updates to LinkedIn.</p>
+                                    <?= Idno\Core\Idno::site()->language()->_('Easily share updates to LinkedIn.');?></p>
 
                                 <p>
-                                    With LinkedIn connected, you can cross-post updates, pictures, and posts that you
-                                    publish publicly on your site.
+                                    <?= Idno\Core\Idno::site()->language()->_('With LinkedIn connected, you can cross-post updates, pictures, and posts that you publish publicly on your site.'); ?>
                                 </p>
 
 
@@ -57,7 +56,7 @@
 
 								<p>
                                	 <a href="<?= $vars['login_url'] ?>" class="connect lkin"><i class="fab fa-linkedin"></i>
- Connect LinkedIn</a>
+ <?= Idno\Core\Idno::site()->language()->_('Connect LinkedIn'); ?></a>
                             	</p>
 								</div>
                             </div>
@@ -75,9 +74,7 @@
                         <div class="row">
                             <div class="col-md-7">
                                 <p>
-                                    Your account is currently connected to LinkedIn. Public updates, pictures, and posts
-                                    that you publish here
-                                    can be cross-posted to LinkedIn.
+                                    <?= Idno\Core\Idno::site()->language()->_('Your account is currently connected to LinkedIn. Public updates, pictures, and posts that you publish here can be cross-posted to LinkedIn.'); ?>
                                 </p>
 
                                 <div class="social">
@@ -86,7 +83,7 @@
                                         <p>
                                             <input type="hidden" name="remove" value="1"/>
                                             <button type="submit" class="connect lkin connected"><i class="fab fa-linkedin"></i>
- Disconnect LinkedIn
+ <?= Idno\Core\Idno::site()->language()->_('Disconnect LinkedIn'); ?>
                                             </button>
                                             <?= \Idno\Core\site()->actions()->signForm('/account/linkedin/') ?>
                                         </p>

@@ -5,12 +5,14 @@
      */
 
     namespace IdnoPlugins\LinkedIn\Pages {
-
+        
         /**
          * Default class to serve LinkedIn-related account settings
          */
         class Account extends \Idno\Common\Page
         {
+            
+            use Idno\Core\Idno;
 
             function getContent()
             {
@@ -43,7 +45,7 @@
                         $user->linkedin = [];
                     }
                     $user->save();
-                    \Idno\Core\site()->session()->addMessage('Your LinkedIn settings have been removed from your account.');
+                    \Idno\Core\site()->session()->addMessage(Idno::site()->language()->_('Your LinkedIn settings have been removed from your account.'));
                 }
                 $this->forward('/account/linkedin/');
             }

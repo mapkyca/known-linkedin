@@ -11,6 +11,7 @@
          */
         class Admin extends \Idno\Common\Page
         {
+            use Idno\Core\Idno;
 
             function getContent()
             {
@@ -29,7 +30,7 @@
                     'secret' => $secret
                 ];
                 \Idno\Core\site()->config()->save();
-                \Idno\Core\site()->session()->addMessage('Your LinkedIn application details were saved.');
+                \Idno\Core\site()->session()->addMessage(Idno::site()->language()->_('Your LinkedIn application details were saved.'));
                 $this->forward(\Idno\Core\site()->config()->getDisplayURL() . 'admin/linkedin/');
             }
 

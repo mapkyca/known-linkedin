@@ -3,6 +3,8 @@
 namespace IdnoPlugins\LinkedIn {
     
     class Client {
+        
+        use \Idno\Core\Idno;
 	
 	private $key;
 	private $secret;
@@ -29,7 +31,7 @@ namespace IdnoPlugins\LinkedIn {
 	public function getAccessToken($endpointUrl, $grant_type = 'authorization_code', array $parameters) {
 	    
 	    if ($parameters['state'] != \Idno\Core\site()->plugins()->get('LinkedIn')->getState())
-		throw new \Exception('State value not correct, possible CSRF attempt.');
+		throw new \Exception(Idno::site()->language()->_('State value not correct, possible CSRF attempt.'));
 		
 	    unset($parameters['state']);
 	    

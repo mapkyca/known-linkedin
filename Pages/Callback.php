@@ -11,7 +11,8 @@
          */
         class Callback extends \Idno\Common\Page
         {
-
+            use \Idno\Core\Idno;
+            
             function getContent()
             {
                 $this->gatekeeper(); // Logged-in users only
@@ -30,7 +31,7 @@
 				
 				// Verify access token
 				if (!$response->access_token) {
-				    throw new \Exception('Sorry, access token is unavailable.');
+				    throw new \Exception(Idno::site()->language()->_('Sorry, access token is unavailable.'));
 				}
 				
 				if (($this->getInput('error')) && ($error = $this->getInput('error_description'))) {
@@ -54,7 +55,7 @@
 				    if ($basic_profile->message)
 					throw new \Exception($basic_profile->message);
 				    else 
-					throw new \Exception("Sorry, there was a problem getting your profile. Does your app have appropriate permissions?");
+					throw new \Exception(Idno::site()->language()->_("Sorry, there was a problem getting your profile. Does your app have appropriate permissions?"));
 				}
 
 				$id = $basic_profile->id;
@@ -64,7 +65,7 @@
 				// Get company pages
 				if (\Idno\Core\site()->config()->multipleSyndicationAccounts()) {
 				    
-				    $result = \Idno\Core\Webservice::get('https://api.linkedin.com/v1/companies', array('oauth2_access_token' => $response->access_token, 'format' => 'json', 'is-company-admin' => 'true'));
+				    $result = \Idno\Core\Webservice::get(\IdnoPlugins\LinkedIn\Main::$COMPANIES_URL, array('oauth2_access_token' => $response->access_token, 'format' => 'json', 'is-company-admin' => 'true'));
 				    $admin_pages = $result['content'];
 				    
 				    if (!empty($admin_pages)) {
@@ -79,7 +80,7 @@
 				}
 
 				$user->save();
-				\Idno\Core\site()->session()->addMessage('Your LinkedIn account was connected.');
+				\Idno\Core\site()->session()->addMessage(Idno::site()->language()->_('Your LinkedIn account was connected.'));
 
 			    }
 			}
