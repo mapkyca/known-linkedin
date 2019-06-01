@@ -6,12 +6,13 @@
 
     namespace IdnoPlugins\LinkedIn\Pages {
 
+	use \Idno\Core\Idno;
+	    
         /**
          * Default class to serve the LinkedIn callback
          */
         class Callback extends \Idno\Common\Page
         {
-            use \Idno\Core\Idno;
             
             function getContent()
             {
@@ -45,7 +46,7 @@
                                 \IdnoPlugins\LinkedIn\Main::$PEOPLE_URL, 
 				    [
 					'oauth2_access_token' => $response->access_token, 
-					'format' => 'json'
+					'format' => 'json',
 				    ]
 				);
 				$basic_profile = json_decode($result['content']);

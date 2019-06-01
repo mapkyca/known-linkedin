@@ -2,10 +2,10 @@
 
 namespace IdnoPlugins\LinkedIn {
     
+    use \Idno\Core\Idno;
+	
     class Client {
         
-        use \Idno\Core\Idno;
-	
 	private $key;
 	private $secret;
 	

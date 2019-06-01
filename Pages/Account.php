@@ -6,14 +6,14 @@
 
     namespace IdnoPlugins\LinkedIn\Pages {
         
+	use Idno\Core\Idno;
+	
         /**
          * Default class to serve LinkedIn-related account settings
          */
         class Account extends \Idno\Common\Page
         {
             
-            use Idno\Core\Idno;
-
             function getContent()
             {
                 $this->gatekeeper(); // Logged-in users only
@@ -23,7 +23,7 @@
                             $login_url = $linkedinAPI->getAuthenticationUrl(
                                 \IdnoPlugins\LinkedIn\Main::$AUTHORIZATION_ENDPOINT,
                                 \IdnoPlugins\LinkedIn\Main::getRedirectUrl(),
-                                ['scope' => 'w_share,rw_company_admin,r_emailaddress,r_basicprofile', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()]
+                                ['scope' => 'w_share rw_company_admin r_emailaddress r_basicprofile', 'response_type' => 'code', 'state' => \IdnoPlugins\LinkedIn\Main::getState()]
                             );
 			    
                         }

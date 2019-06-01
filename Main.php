@@ -8,7 +8,8 @@
             public static $AUTHORIZATION_ENDPOINT = 'https://www.linkedin.com/oauth/v2/authorization';
             public static $TOKEN_ENDPOINT = 'https://www.linkedin.com/oauth/v2/accessToken';
             public static $SHARE_URL = 'https://api.linkedin.com/v2/shares';
-            public static $PEOPLE_URL = 'https://api.linkedin.com/v2/me/~:(id,first-name,last-name,site-standard-profile-request)';
+            //public static $PEOPLE_URL = 'https://api.linkedin.com/v2/me/~:(id,first-name,last-name,site-standard-profile-request)';
+	    public static $PEOPLE_URL = 'https://api.linkedin.com/v2/me/?projection=(id,first-name,last-name,site-standard-profile-request)';
             public static $COMPANIES_URL = 'https://api.linkedin.com/v2/organizations/';
 
             public static $company = false;
